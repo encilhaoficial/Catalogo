@@ -1,0 +1,304 @@
+/* ==========================================================================
+   Catálogo Encilha
+   1. Variáveis  2. Base  3. Cabeçalho e filtros  4. Grade e cards
+   5. Rodapé e botão flutuante
+   ========================================================================== */
+
+/* 1. Variáveis ------------------------------------------------------------ */
+:root {
+  --madeira: #a34a1d;
+  --madeira-escura: #7a3010;
+  --fundo: #f7ecda;
+  --card: #fffaf1;
+  --texto: #3b1a0c;
+  --texto-suave: #6b4a36;
+  --foto: #e6d3b5;
+  --preco: #a34a1d;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #241008;
+    --card: #34190d;
+    --texto: #f7ecda;
+    --texto-suave: #d8bfa5;
+    --foto: #4a2a1a;
+    --preco: #f0a070;
+  }
+}
+
+/* 2. Base ------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: 150px;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: "Lora", Georgia, serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--madeira-escura);
+  z-index: 10;
+}
+
+.wood {
+  background: repeating-linear-gradient(
+    180deg,
+    var(--madeira) 0,
+    var(--madeira) 58px,
+    var(--madeira-escura) 58px,
+    var(--madeira-escura) 61px
+  );
+  color: #f7ecda;
+}
+
+/* 3. Cabeçalho e filtros ----------------------------------------------------- */
+.hero {
+  text-align: center;
+  padding: 28px 20px 22px;
+}
+
+.hero img {
+  width: min(300px, 78%);
+  height: auto;
+}
+
+.hero p {
+  margin: 8px auto 0;
+  max-width: 420px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--madeira-escura);
+  padding: 10px 12px 8px;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+
+.chips button {
+  flex: none;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid #f7ecda;
+  border-radius: 999px;
+  background: transparent;
+  color: #f7ecda;
+  font: 500 14px "Oswald", sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.chips button[aria-pressed="true"] {
+  background: #f7ecda;
+  color: #5a2209;
+}
+
+.bar input {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  background: #fffaf1;
+  color: #3b1a0c;
+  font: 16px "Lora", serif;
+}
+
+/* 4. Grade e cards ------------------------------------------------------------ */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 12px 90px;
+}
+
+h2 {
+  margin: 12px 4px;
+  font: 700 28px "Oswald", sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.status {
+  margin: 0 4px 12px;
+  color: var(--texto-suave);
+  font-size: 15px;
+}
+
+.status:empty {
+  display: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border-bottom: 5px solid var(--madeira);
+}
+
+/* Foto vertical (4:5) exibida inteira, sem corte. */
+.card-foto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 5;
+  background: var(--foto);
+}
+
+.card-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-foto-variacoes img {
+  width: 50%;
+}
+
+.card-foto-multiplas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card-foto-multiplas img {
+  width: 100%;
+}
+
+.card-foto img.placeholder {
+  width: 46%;
+  height: auto;
+  opacity: 0.35;
+}
+
+.card-corpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px 12px;
+}
+
+.card-nome {
+  font: 500 17px/1.15 "Oswald", sans-serif;
+  text-transform: uppercase;
+}
+
+.card-preco {
+  margin-top: auto;
+  padding-top: 4px;
+  color: var(--preco);
+  font: 700 20px "Oswald", sans-serif;
+}
+
+.card-preco.sem-preco {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.card-precos-variacoes {
+  margin-top: auto;
+  padding-top: 4px;
+  color: var(--preco);
+  font-size: 13px;
+}
+
+.card-preco-variacao {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.btn {
+  display: block;
+  min-height: 44px;
+  margin-top: 6px;
+  background: var(--madeira);
+  color: #fff;
+  font: 500 15px/44px "Oswald", sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.vazio {
+  grid-column: 1 / -1;
+  padding: 28px 8px;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+/* 5. Rodapé e botão flutuante ----------------------------------------------------- */
+footer {
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-size: 15px;
+}
+
+footer p {
+  margin: 6px 0 0;
+}
+
+.fab {
+  position: fixed;
+  right: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: #1f8f4a;
+  color: #fff;
+  font: 500 16px/48px "Oswald", sans-serif;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Catálogo Encilha</title>
+    <meta name="description" content="Peças artesanais e aperos autorais em corda para cavalos.">
+    <link rel="icon" href="assets/logo-icone.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Lora:wght@400;600&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <header class="wood hero">
+      <img src="assets/logo-longa.png" alt="Encilha" width="300" height="164">
+      <p>Peças artesanais e aperos autorais em corda</p>
+    </header>
+
+    <div class="bar">
+      <nav class="chips" id="categorias" aria-label="Categorias"></nav>
+      <input id="busca" type="search" placeholder="Buscar peça (ex.: coruja, romal)" aria-label="Buscar peça">
+    </div>
+
+    <main>
+      <h2 id="titulo"></h2>
+      <p id="status" class="status" role="status"></p>
+      <div class="grid" id="produtos"></div>
+    </main>
+
+    <footer class="wood">
+      <img src="assets/logo-icone.png" alt="" width="64" height="64">
+      <p>@encilhaoficial · Ponta Grossa, PR<br>Encomendas pelo WhatsApp</p>
+    </footer>
+
+    <a class="fab" id="whatsapp" href="#" aria-label="Falar pelo WhatsApp">WhatsApp</a>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
