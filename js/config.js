@@ -14,10 +14,10 @@ export const CONFIG = {
   // WhatsApp com DDI + DDD + número, só dígitos.
   whatsapp: "5542999665392",
 
-  // Fotos: fotos/<nome-do-produto-sem-acentos>.jpg (ex.: fotos/bucal-coruja.jpg).
+  // Fotos: fotos/<nome-do-produto-sem-acentos>.webp (ex.: fotos/bucal-coruja.webp).
   // Uma coluna opcional "Foto" na planilha pode indicar outro arquivo.
   pastaFotos: "fotos",
-  extensoesFoto: ["jpg","png"],
+  extensoesFoto: ["webp","jpg","png"],
 
   // Ordem das abas. Categorias fora da lista entram no final.
   ordemCategorias: [

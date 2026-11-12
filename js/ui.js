@@ -24,13 +24,21 @@ function criarPlaceholder() {
 
 function criarImagem(produto) {
   const img = criar("img");
+  const caminhoFoto = produto.foto ? `${CONFIG.pastaFotos}/${produto.foto}` : "";
+  const fotoWebp = produto.foto
+    ? /\.[^./\\]+$/.test(produto.foto)
+      ? caminhoFoto.replace(/\.[^./\\]+$/, ".webp")
+      : `${caminhoFoto}.webp`
+    : "";
   const candidatas = produto.foto
-    ? [`${CONFIG.pastaFotos}/${produto.foto}`]
+    ? [...new Set([fotoWebp, caminhoFoto])]
     : CONFIG.extensoesFoto.map((ext) => `${CONFIG.pastaFotos}/${produto.slug}.${ext}`);
 
   let tentativa = 0;
   img.alt = produto.nome;
   img.loading = "lazy";
+  img.width = 800;
+  img.height = 1000;
   img.src = candidatas[0];
   img.addEventListener("error", () => {
     tentativa += 1;
