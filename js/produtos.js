@@ -50,7 +50,7 @@ export function linhasParaProdutos(linhas) {
   const iProduto = coluna("produto");
   const iCategoria = coluna("categoria");
   const iPreco = coluna("preco");
-  const iFoto = coluna("foto");
+  const iFoto = cabecalho.findIndex((c) => ["foto", "fotos"].includes(normalizar(c)));
   const iNoCatalogo = coluna("no catalogo");
 
   if (iProduto < 0 || iCategoria < 0 || iPreco < 0 || iNoCatalogo < 0) {

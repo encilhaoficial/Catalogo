@@ -29,8 +29,10 @@ ferramentas/      utilitários para preparar as fotos
 As colunas obrigatórias são `Produto`, `Categoria`, `Preço` e `No Catálogo`. Preencha
 `No Catálogo` com `Sim` para exibir um produto; `Não`, vazio ou qualquer outro valor o
 mantém fora do site. As abas do site nascem das categorias dos produtos exibidos. Uma
-coluna opcional `Foto` pode indicar o nome de um arquivo da pasta `fotos/`. O CSV local
-de reserva também precisa ter essas colunas para funcionar quando a planilha não estiver
+coluna opcional `Foto` ou `Fotos` pode indicar nomes de arquivos da pasta `fotos/`.
+Para exibir várias imagens no mesmo card, informe os nomes separados por `|`, sem
+extensão, por exemplo `redea-romal-modelo-1|redea-romal-modelo-2`. O CSV local de
+reserva também precisa ter essas colunas para funcionar quando a planilha não estiver
 disponível. O preço pode ser informado com ou sem `R$`, usando vírgula ou ponto como
 separador decimal.
 
@@ -86,7 +88,7 @@ dividindo o espaço.
 
 ## Testar no computador
 
-Os módulos JS exigem um endereço http. Dentro da pasta, rode `python3 -m http.server 8000`
+Os módulos JS exigem um endereço http. Dentro da pasta, rode `python -m http.server 8000`
 e abra http://localhost:8000. Abrir o `index.html` com duplo clique não funciona.
 
 ## Publicar de graça

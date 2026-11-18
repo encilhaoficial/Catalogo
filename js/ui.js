@@ -48,14 +48,20 @@ function criarImagem(produto) {
   return img;
 }
 
-// Mostra as fotos das cores lado a lado; sem foto, mostra a logo.
+// Mostra todas as fotos lado a lado; sem foto, mostra a logo.
 function criarFoto(produtos) {
   const caixa = criar("div", "card-foto");
-  if (produtos.length > 1) {
+  const imagens = produtos.flatMap((produto) => {
+    const fotos = produto.foto.split("|").map((foto) => foto.trim()).filter(Boolean);
+    return (fotos.length ? fotos : [""]).map((foto) =>
+      criarImagem(foto ? { ...produto, foto } : produto),
+    );
+  });
+  if (imagens.length > 1) {
     caixa.classList.add("card-foto-variacoes");
-    if (produtos.length > 2) caixa.classList.add("card-foto-multiplas");
+    if (imagens.length > 2) caixa.classList.add("card-foto-multiplas");
   }
-  caixa.append(...produtos.map(criarImagem));
+  caixa.append(...imagens);
   return caixa;
 }
 
