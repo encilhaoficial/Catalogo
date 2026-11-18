@@ -189,8 +189,13 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  padding: 0;
+  border: 0;
   aspect-ratio: 4 / 5;
   background: var(--foto);
+  color: inherit;
+  cursor: zoom-in;
 }
 
 .card-foto img {
@@ -227,8 +232,144 @@ h2 {
 }
 
 .card-nome {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
   font: 500 17px/1.15 "Oswald", sans-serif;
   text-transform: uppercase;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.card-foto:focus-visible,
+.card-nome:focus-visible {
+  outline: 3px solid var(--madeira);
+  outline-offset: 3px;
+}
+
+.galeria {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(94vw, 1000px);
+  height: min(92vh, 1000px);
+  max-width: none;
+  max-height: 92vh;
+  margin: auto;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: #171411;
+  color: #fff;
+}
+
+.galeria::backdrop {
+  background: rgba(0, 0, 0, 0.86);
+  backdrop-filter: blur(3px);
+}
+
+.galeria-topo {
+  display: flex;
+  flex: none;
+  justify-content: flex-end;
+}
+
+.galeria-fechar,
+.galeria-nav {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  cursor: pointer;
+}
+
+.galeria-fechar {
+  width: 42px;
+  height: 42px;
+  font: 28px/1 sans-serif;
+}
+
+.galeria-palco {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+  background: #080706;
+  touch-action: pan-y;
+}
+
+.galeria-imagem {
+  z-index: 0;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.galeria-palco img.placeholder {
+  width: 46%;
+  height: auto;
+  opacity: 0.35;
+}
+
+.galeria-marca {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  place-items: center;
+  transform: rotate(-18deg) scale(1.15);
+  pointer-events: none;
+  user-select: none;
+}
+
+.galeria-marca span {
+  color: rgba(255, 255, 255, 0.5);
+  font: 500 clamp(12px, 2.4vw, 24px)/1.2 "Oswald", sans-serif;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.galeria-nav {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  transform: translateY(-50%);
+  font: 34px/1 sans-serif;
+}
+
+.galeria-anterior {
+  left: 12px;
+}
+
+.galeria-proxima {
+  right: 12px;
+}
+
+.galeria-contador {
+  flex: none;
+  margin: 0;
+  color: #fff;
+  font: 500 15px "Oswald", sans-serif;
+  text-align: center;
+}
+
+.galeria button:focus-visible {
+  outline: 3px solid #f7ecda;
+  outline-offset: 3px;
 }
 
 .card-preco {
