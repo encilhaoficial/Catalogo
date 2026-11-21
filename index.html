@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Catálogo Encilha</title>
     <meta name="description" content="Peças artesanais e aperos autorais em corda para cavalos.">
+    <meta name="theme-color" content="#7a3010">
     <link rel="icon" href="assets/logo-icone.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Lora:wght@400;600&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap">
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
     <header class="wood hero">
-      <img src="assets/logo-longa.png" alt="Encilha" width="300" height="164">
-      <p>Peças artesanais e aperos autorais em corda</p>
+      <img src="assets/logo-longa.png" alt="Encilha" width="300" height="164" alt="Encilha: Peças artesanais e aperos autorais em corda">
     </header>
+
+    <div class="busca">
+      <input id="busca" type="search" placeholder="Buscar peça (ex.: coruja, romal)" aria-label="Buscar peça">
+    </div>
 
     <div class="bar">
       <nav class="chips" id="categorias" aria-label="Categorias"></nav>
-      <input id="busca" type="search" placeholder="Buscar peça (ex.: coruja, romal)" aria-label="Buscar peça">
     </div>
 
     <main>
@@ -26,9 +31,33 @@
       <div class="grid" id="produtos"></div>
     </main>
 
+    <section class="pedido" aria-labelledby="como-pedir">
+      <div class="pedido-interno">
+        <h2 id="como-pedir">Como pedir</h2>
+        <ol>
+          <li>
+            <h3>Escolha a peça</h3>
+            <p>Navegue pelas categorias e toque na foto para ver mais imagens.</p>
+          </li>
+          <li>
+            <h3>Chame no WhatsApp</h3>
+            <p>O botão de cada peça já envia o nome dela na mensagem.</p>
+          </li>
+          <li>
+            <h3>Combine a encomenda</h3>
+            <p>Tire dúvidas e acerte os detalhes direto com a Encilha.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <footer class="wood">
       <img src="assets/logo-icone.png" alt="" width="64" height="64">
-      <p>@encilhaoficial · Ponta Grossa, PR<br>Encomendas pelo WhatsApp</p>
+      <p>Ponta Grossa, PR</p>
+      <nav class="rodape-links" aria-label="Contato">
+        <a href="https://www.instagram.com/encilhaoficial/" rel="noopener">Instagram @encilhaoficial</a>
+        <a id="whatsapp-rodape" href="#">WhatsApp</a>
+      </nav>
     </footer>
 
     <a class="fab" id="whatsapp" href="#" aria-label="Falar pelo WhatsApp">WhatsApp</a>

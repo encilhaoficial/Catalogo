@@ -15,18 +15,14 @@ FORMATOS_ORIGINAIS = {".jpg", ".jpeg", ".png"}
 
 def converter(origem: Path, destino: Path) -> int:
     with Image.open(origem) as arquivo:
-        foto = ImageOps.exif_transpose(arquivo).convert("RGBA")
+        foto = ImageOps.exif_transpose(arquivo)
+        modo = "RGBA" if "A" in foto.getbands() or "transparency" in foto.info else "RGB"
+        foto = foto.convert(modo)
         foto.thumbnail((LARGURA, ALTURA), Image.Resampling.LANCZOS)
-
-        quadro = Image.new("RGBA", (LARGURA, ALTURA), (0, 0, 0, 0))
-        quadro.alpha_composite(
-            foto,
-            ((LARGURA - foto.width) // 2, (ALTURA - foto.height) // 2),
-        )
 
     qualidade = 75
     while True:
-        quadro.save(destino, "WEBP", quality=qualidade, method=6)
+        foto.save(destino, "WEBP", quality=qualidade, method=6)
         tamanho = destino.stat().st_size
         if tamanho <= TAMANHO_ALVO or qualidade <= QUALIDADE_MINIMA:
             return tamanho
@@ -35,13 +31,18 @@ def converter(origem: Path, destino: Path) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Gera versões WebP 4:5 para as fotos do catálogo."
+        description="Gera versões WebP mantendo a proporção original das fotos."
     )
     parser.add_argument(
         "--pasta",
         type=Path,
         default=Path(__file__).resolve().parents[1] / "fotos",
         help="Pasta com fotos PNG/JPG (padrão: fotos/ do catálogo).",
+    )
+    parser.add_argument(
+        "--forcar",
+        action="store_true",
+        help="Converte novamente mesmo as fotos que já têm WebP atualizado.",
     )
     args = parser.parse_args()
     pasta = args.pasta.resolve()
@@ -56,7 +57,11 @@ def main() -> None:
             continue
 
         destino = origem.with_suffix(".webp")
-        if destino.exists() and destino.stat().st_mtime_ns >= origem.stat().st_mtime_ns:
+        if (
+            not args.forcar
+            and destino.exists()
+            and destino.stat().st_mtime_ns >= origem.stat().st_mtime_ns
+        ):
             atualizadas += 1
             continue
 

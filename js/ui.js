@@ -24,6 +24,8 @@ function criarPlaceholder() {
 
 function criarImagem(produto) {
   const img = criar("img");
+  img.draggable = false;
+  img.addEventListener("contextmenu", (evento) => evento.preventDefault());
   const caminhoFoto = produto.foto ? `${CONFIG.pastaFotos}/${produto.foto}` : "";
   const fotoWebp = produto.foto
     ? /\.[^./\\]+$/.test(produto.foto)
@@ -177,7 +179,10 @@ function criarFoto(produtos) {
   const imagens = produtos.flatMap(fotosDoProduto).map(criarImagem);
   if (imagens.length > 1) {
     caixa.classList.add("card-foto-variacoes");
-    if (imagens.length > 2) caixa.classList.add("card-foto-multiplas");
+    if (imagens.length > 2) {
+      caixa.classList.add("card-foto-multiplas");
+      caixa.style.gridTemplateRows = `repeat(${Math.ceil(imagens.length / 2)}, minmax(0, 1fr))`;
+    }
   }
   caixa.append(...imagens);
   caixa.addEventListener("click", () => abrirGaleria(produtos, caixa));

@@ -38,12 +38,17 @@ separador decimal.
 
 ## Fotos
 
-As fotos do catálogo são servidas em WebP, com 800 × 1000 pixels (proporção 4:5) e
-carregamento sob demanda. Para novos produtos, use essa proporção e prefira arquivos
-WebP de poucas dezenas de KB. Salve em `fotos/` com o nome do produto sem acentos,
-minúsculo e com hífens, por exemplo `fotos/bucal-coruja.webp`. Arquivos `.jpg` e `.png`
-continuam aceitos como alternativa. Sem foto, aparece a logo. Imagens fora de 4:5 são
-ajustadas sem cortar o conteúdo.
+As fotos do catálogo são servidas em WebP, com carregamento sob demanda. Para novos
+produtos, prefira arquivos WebP de poucas dezenas de KB. Salve em `fotos/` com o nome do
+produto sem acentos, minúsculo e com hífens, por exemplo `fotos/bucal-coruja.webp`.
+Arquivos `.jpg` e `.png` continuam aceitos como alternativa. Sem foto, aparece a logo.
+O conversor mantém a proporção original e limita as imagens a 800 × 1000 pixels, sem
+acrescentar margens. Nos cards, elas são recortadas para preencher o quadro 4:5; na
+galeria, a foto inteira é exibida.
+
+O site bloqueia o menu de contexto e o arraste direto das fotos para dificultar o
+salvamento casual. Isso não impede que alguém obtenha imagens que são públicas no site,
+por exemplo acessando os arquivos pela rede ou fazendo uma captura de tela.
 
 ### Converter fotos para WebP
 
@@ -61,11 +66,12 @@ python -m pip install Pillow
 python ferramentas/otimizar_fotos.py
 ```
 
-O script cria `bucal-coruja.webp` ao lado da foto original, redimensionada para
-800 × 1000 pixels (4:5). O original é preservado. Cada vez que adicionar fotos, rode o
-comando novamente: só as fotos novas ou alteradas serão convertidas. Fotos que já têm
-uma versão WebP atualizada serão ignoradas. Fotos muito detalhadas podem passar do
-alvo de 70 KB para preservar a qualidade.
+O script cria `bucal-coruja.webp` ao lado da foto original, reduzindo-a para caber em
+800 × 1000 pixels e preservando sua proporção, sem ampliar nem adicionar margens. O
+original é preservado. Cada vez que adicionar fotos, rode o comando novamente: só as
+fotos novas ou alteradas serão convertidas. Use `python ferramentas/otimizar_fotos.py
+--forcar` para converter todas novamente, por exemplo após alterar o processamento.
+Fotos muito detalhadas podem passar do alvo de 70 KB para preservar a qualidade.
 
 ### Gerar o nome da foto no Excel
 
@@ -83,7 +89,7 @@ nela, sem acrescentar `fotos/`. A função `REGEXREPLACE` requer uma versão atu
 
 Para itens iguais disponíveis em cores diferentes, acrescente `-cor-<cor>` ao nome de
 cada produto e foto, por exemplo `bucal-funciona-cor-preto.webp` e
-`bucal-funciona-cor-bege.webp`. As cores aparecem juntas no mesmo card, com as fotos
+`bucal-funciona-cor-bege.webp`. As peças aparecem juntas no mesmo card, com as fotos
 dividindo o espaço.
 
 ## Testar no computador

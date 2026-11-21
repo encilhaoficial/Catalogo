@@ -14,6 +14,7 @@ const els = {
   status: document.getElementById("status"),
   produtos: document.getElementById("produtos"),
   whatsapp: document.getElementById("whatsapp"),
+  whatsappRodape: document.getElementById("whatsapp-rodape"),
 };
 
 const estado = { produtos: [], categorias: [], categoria: "" };
@@ -22,7 +23,12 @@ function atualizar() {
   const busca = els.busca.value.trim();
   const lista = filtrarProdutos(estado.produtos, estado.categoria, busca);
 
-  els.titulo.textContent = busca ? `Resultados (${contarCards(lista)})` : estado.categoria;
+  const total = contarCards(lista);
+
+  els.titulo.textContent = busca ? "Resultados" : estado.categoria;
+  els.status.textContent = total
+    ? `${total} ${total === 1 ? "peça" : "peças"}${busca ? ` para “${busca}”` : ""}`
+    : "";
   desenharCategorias(els.categorias, estado.categorias, busca ? "" : estado.categoria, (nome) => {
     estado.categoria = nome;
     els.busca.value = "";
@@ -34,6 +40,7 @@ function atualizar() {
 
 async function iniciar() {
   els.whatsapp.href = linkWhatsApp();
+  if (els.whatsappRodape) els.whatsappRodape.href = linkWhatsApp();
   els.status.textContent = "Carregando produtos…";
 
   try {
